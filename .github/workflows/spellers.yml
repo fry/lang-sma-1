@@ -76,7 +76,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup Divvun CI
-        uses: divvun/actions/setup@master
+        uses: divvun/actions/setup@kbdgen
         with:
           key: ${{ secrets.DIVVUN_KEY }}
       - name: Download Spellers
@@ -85,7 +85,7 @@ jobs:
           name: spellers
       - name: Run Divvun Bundler
         id: bundler
-        uses: divvun/actions/speller/bundle@master
+        uses: divvun/actions/speller/bundle@kbdgen
         with:
           bundleType: ${{ matrix.type }}
           manifest: ".gut/manifest.toml"
@@ -95,7 +95,7 @@ jobs:
           name: installer
           path: "${{ steps.bundler.outputs.bundle }}"
       - name: Deploy to Pahkat
-        uses: divvun/actions/speller/deploy@master
+        uses: divvun/actions/speller/deploy@kbdgen
         with:
           payload: "${{ steps.bundler.outputs.bundle }}"
           bundleType: ${{ matrix.type }}
